@@ -1,11 +1,10 @@
 package com.example.actividad1am.componentes
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,101 +20,48 @@ import androidx.compose.material.icons.filled.Undo
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material.icons.filled.GridView
 
-// Colores principales
-val fondo = Color(0xFFE1DBD5)
-val tablero = Color(0xFFB8A99A)
-val vacia = Color(0xFFCDC1B4)
-val beige = Color(0xFFEDE0C8)
-val naranja = Color(0xFFF2B179)
-val rojo = Color(0xFFF67C5F)
-val amarillo = Color(0xFFF9D65C)
-
-// SCORE GLOBAL
-var scoreGlobal by mutableStateOf(0)
-var bestGlobal by mutableStateOf(0)
-
-// -------- FUNCIONES --------
-
-fun siguienteValor(valor: Int): Int {
-    return when {
-        valor <= 0 -> 2
-        valor >= 2048 -> 2048
-        else -> valor * 2
-    }
-}
-
-fun actualizarScore(valores: List<Int>) {
-    scoreGlobal = valores.sum()
-    if (scoreGlobal > bestGlobal) {
-        bestGlobal = scoreGlobal
-    }
-}
+val fondo_g2 = Color(0xFFE1DBD5)
+val tablero_g2 = Color(0xFFB8A99A)
+val vacia_g2 = Color(0xFFCDC1B4)
+val beige_g2 = Color(0xFFEDE0C8)
+val naranja_g2 = Color(0xFFF2B179)
+val rojo_g2 = Color(0xFFF67C5F)
+val amarillo_g2 = Color(0xFFF9D65C)
 
 @Composable
-fun Header2048() {
+fun Header2048_g2() {
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp, bottom = 20.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
-            Icon(
-                imageVector = Icons.Default.Menu,
-                contentDescription = "Menu",
-                tint = Color(0xFF776E65)
-            )
-
-            Icon(
-                imageVector = Icons.Default.Refresh,
-                contentDescription = "Reset",
-                tint = Color(0xFF776E65)
-            )
+            Icon(Icons.Default.Menu, "Menu", tint = Color(0xFF776E65))
+            Icon(Icons.Default.Refresh, "Reset", tint = Color(0xFF776E65))
         }
 
-        Text(
-            text = "2048",
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF776E65)
-        )
+        Text("2048", fontSize = 36.sp, fontWeight = FontWeight.Bold)
 
         Spacer(modifier = Modifier.height(12.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
 
             Box(
-                modifier = Modifier
-                    .background(Color(0xFFEDE5D8), RoundedCornerShape(14.dp))
+                Modifier.background(Color(0xFFEDE5D8), RoundedCornerShape(14.dp))
                     .padding(horizontal = 50.dp, vertical = 10.dp)
             ) {
-                Text(
-                    text = "SCORE  $scoreGlobal",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color(0xFF776E65)
-                )
+                Text("SCORE  1692")
             }
 
             Box(
-                modifier = Modifier
-                    .background(Color(0xFFF5F1E8), RoundedCornerShape(14.dp))
+                Modifier.background(Color(0xFFF5F1E8), RoundedCornerShape(14.dp))
                     .padding(horizontal = 50.dp, vertical = 10.dp)
             ) {
-                Text(
-                    text = "BEST  $bestGlobal",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color(0xFF776E65)
-                )
+                Text("BEST  7000")
             }
         }
     }
@@ -123,136 +69,107 @@ fun Header2048() {
 
 @Preview(showBackground = true)
 @Composable
-fun Fondo() {
-
-    val valores = remember {
-        mutableStateListOf(
-            4, 32, 8, 32,
-            0, 16, 64, 4,
-            0, 2, 128, 64,
-            0, 0, 8, 0
-        )
-    }
+fun Fondo_g2() {
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(fondo),
+        modifier = Modifier.fillMaxSize().background(fondo_g2),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Header2048()
+        Header2048_g2()
+
         Spacer(modifier = Modifier.height(8.dp))
 
         Column(
-            modifier = Modifier
-                .size(220.dp)
-                .background(tablero, RoundedCornerShape(14.dp))
+            modifier = Modifier.size(220.dp)
+                .background(tablero_g2, RoundedCornerShape(14.dp))
                 .padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Celda(valores[0]) { valores[0] = it; actualizarScore(valores) }
-                Celda(valores[1]) { valores[1] = it; actualizarScore(valores) }
-                Celda(valores[2]) { valores[2] = it; actualizarScore(valores) }
-                Celda(valores[3]) { valores[3] = it; actualizarScore(valores) }
+                Celda_g2("4", beige_g2)
+                Celda_g2("32", rojo_g2)
+                Celda_g2("8", naranja_g2)
+                Celda_g2("32", rojo_g2)
             }
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Celda(valores[4]) { valores[4] = it; actualizarScore(valores) }
-                Celda(valores[5]) { valores[5] = it; actualizarScore(valores) }
-                Celda(valores[6]) { valores[6] = it; actualizarScore(valores) }
-                Celda(valores[7]) { valores[7] = it; actualizarScore(valores) }
+                Celda_g2("", vacia_g2)
+                Celda_g2("16", naranja_g2)
+                Celda_g2("64", rojo_g2)
+                Celda_g2("4", beige_g2)
             }
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Celda(valores[8]) { valores[8] = it; actualizarScore(valores) }
-                Celda(valores[9]) { valores[9] = it; actualizarScore(valores) }
-                Celda(valores[10]) { valores[10] = it; actualizarScore(valores) }
-                Celda(valores[11]) { valores[11] = it; actualizarScore(valores) }
+                Celda_g2("", vacia_g2)
+                Celda_g2("2", beige_g2)
+                Celda_g2("128", amarillo_g2)
+                Celda_g2("64", rojo_g2)
             }
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Celda(valores[12]) { valores[12] = it; actualizarScore(valores) }
-                Celda(valores[13]) { valores[13] = it; actualizarScore(valores) }
-                Celda(valores[14]) { valores[14] = it; actualizarScore(valores) }
-                Celda(valores[15]) { valores[15] = it; actualizarScore(valores) }
+                Celda_g2("", vacia_g2)
+                Celda_g2("", vacia_g2)
+                Celda_g2("8", naranja_g2)
+                Celda_g2("", vacia_g2)
             }
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // -------- ICONOS RESTAURADOS --------
         Box(
             modifier = Modifier
                 .background(Color(0xFFE6DED4), RoundedCornerShape(16.dp))
                 .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
+
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
+                    modifier = Modifier.size(48.dp)
                         .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Default.Undo, contentDescription = "Undo", tint = Color.White)
+                    Icon(Icons.Default.Undo, "Undo", tint = Color.White)
                 }
 
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
+                    modifier = Modifier.size(48.dp)
                         .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Default.Sync, contentDescription = "Sync", tint = Color.White)
+                    Icon(Icons.Default.Sync, "Shuffle", tint = Color.White)
                 }
 
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
+                    modifier = Modifier.size(48.dp)
                         .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Default.GridView, contentDescription = "Grid", tint = Color.White)
+                    Icon(Icons.Default.GridView, "Grid", tint = Color.White)
                 }
             }
         }
     }
 }
 
+
 @Composable
-fun Celda(valorInicial: Int, onCambio: (Int) -> Unit) {
-
-    var valor by remember { mutableStateOf(valorInicial) }
-
-    val color = when (valor) {
-        0 -> vacia
-        2, 4 -> beige
-        8, 16 -> naranja
-        32, 64 -> rojo
-        else -> amarillo
-    }
+fun Celda_g2(texto: String, color: Color) {
 
     Box(
-        modifier = Modifier
-            .size(45.dp)
-            .background(color, RoundedCornerShape(6.dp))
-            .clickable {
-                valor = siguienteValor(valor)
-                onCambio(valor)
-            },
+        modifier = Modifier.size(45.dp)
+            .background(color, RoundedCornerShape(6.dp)),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = if (valor == 0) "" else valor.toString(),
-            fontSize = 16.sp,
+            text = texto,
             fontWeight = FontWeight.Bold,
-            color = if (valor <= 4) Color.Black else Color.White
+            color = if (color == beige_g2) Color.Black else Color.White
         )
     }
 }
