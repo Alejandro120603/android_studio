@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import com.example.actividad1am.componentes.GameOver2048_g3
 import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.filled.Undo
+import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material.icons.filled.GridView
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -17,6 +21,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
+
+
+var pantallaActual_g1 by mutableStateOf("juego")
 
 val fondo_g1 = Color(0xFFE1DBD5)
 val tablero_g1 = Color(0xFFB8A99A)
@@ -47,8 +54,14 @@ fun siguienteValor_g1(valor: Int): Int {
 
 fun actualizarScore_g1(valores: List<Int>) {
     scoreGlobal_g1 = valores.sum()
-    if (scoreGlobal_g1 > bestGlobal_g1) {
-        bestGlobal_g1 = scoreGlobal_g1
+
+    val maxValor = valores.maxOrNull() ?: 0
+    if (maxValor > bestGlobal_g1) {
+        bestGlobal_g1 = maxValor
+    }
+
+    if (bestGlobal_g1 >= 2048) {
+        pantallaActual_g1 = "end"
     }
 }
 
@@ -132,8 +145,69 @@ fun Fondo_g1() {
                 }
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Box(
+            modifier = Modifier
+                .background(Color(0xFFE6DED4), RoundedCornerShape(16.dp))
+                .padding(horizontal = 16.dp, vertical = 10.dp)
+        ) {
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
+                        .clickable {
+                            pantallaActual_g1 = "principal"
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Undo,
+                        contentDescription = "Undo",
+                        tint = Color.White
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
+                        .clickable {
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Sync,
+                        contentDescription = "Shuffle",
+                        tint = Color.White
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
+                        .clickable {
+                            // Aquí luego pondremos navegación
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.GridView,
+                        contentDescription = "Grid",
+                        tint = Color.White
+                    )
+                }
+            }
+        }
+
     }
 }
+
+
 
 @Composable
 fun Celda_g1(valorInicial: Int, onCambio: (Int) -> Unit) {

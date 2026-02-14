@@ -15,7 +15,11 @@ import com.example.actividad1am.componentes.Botones
 import com.example.actividad1am.ui.theme.Actividad1AMTheme
 import com.example.actividad1am.ui.theme.MyTextView
 
+
 class MainActivity : ComponentActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,4 +54,5 @@ fun GreetingPreview() {
     Actividad1AMTheme {
         Greeting("Android", myTextView = MyTextView())
     }
+
 }
