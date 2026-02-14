@@ -17,11 +17,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Undo
 import androidx.compose.material.icons.filled.Sync
 
-
-// ============================
-// COLORES RENOMBRADOS (g3)
-// ============================
-
 val fondo_g3 = Color(0xFFE1DBD5)
 val tablero_g3 = Color(0xFFB8A99A)
 val beige_g3 = Color(0xFFEDE0C8)

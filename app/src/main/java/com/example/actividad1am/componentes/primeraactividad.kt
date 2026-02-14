@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import com.example.actividad1am.componentes.GameOver2048_g3
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.filled.Undo
 import androidx.compose.material.icons.filled.Sync
@@ -22,8 +22,9 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 
-
 var pantallaActual_g1 by mutableStateOf("juego")
+var nombreUsuario_g1 by mutableStateOf("")
+var perdio_g1 by mutableStateOf(false)
 
 val fondo_g1 = Color(0xFFE1DBD5)
 val tablero_g1 = Color(0xFFB8A99A)
@@ -40,9 +41,9 @@ val c256_g1 = Color(0xFFEDCC61)
 val c512_g1 = Color(0xFFEDC850)
 val c1024_g1 = Color(0xFFEDC53F)
 val c2048_g1 = Color(0xFFEDC22E)
+
 var scoreGlobal_g1 by mutableStateOf(0)
 var bestGlobal_g1 by mutableStateOf(0)
-
 
 fun siguienteValor_g1(valor: Int): Int {
     return when {
@@ -53,6 +54,7 @@ fun siguienteValor_g1(valor: Int): Int {
 }
 
 fun actualizarScore_g1(valores: List<Int>) {
+
     scoreGlobal_g1 = valores.sum()
 
     val maxValor = valores.maxOrNull() ?: 0
@@ -63,8 +65,11 @@ fun actualizarScore_g1(valores: List<Int>) {
     if (bestGlobal_g1 >= 2048) {
         pantallaActual_g1 = "end"
     }
-}
 
+    if (maxValor < 2048 && scoreGlobal_g1 > 0) {
+        perdio_g1 = true
+    }
+}
 
 @Composable
 fun Header2048_g1() {
@@ -145,6 +150,24 @@ fun Fondo_g1() {
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+        OutlinedTextField(
+            value = nombreUsuario_g1,
+            onValueChange = { nombreUsuario_g1 = it },
+            label = { Text("Ingresa tu nombre") }
+        )
+        if (perdio_g1 && nombreUsuario_g1.isNotBlank()) {
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "$nombreUsuario_g1 sigue participando",
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF776E65)
+            )
+        }
+
         Spacer(modifier = Modifier.height(20.dp))
 
         Box(
@@ -157,57 +180,36 @@ fun Fondo_g1() {
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
+                    modifier = Modifier.size(48.dp)
                         .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
-                        .clickable {
-                            pantallaActual_g1 = "principal"
-                        },
+                        .clickable { pantallaActual_g1 = "principal" },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Undo,
-                        contentDescription = "Undo",
-                        tint = Color.White
-                    )
+                    Icon(Icons.Default.Undo, "Undo", tint = Color.White)
                 }
+
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
-                        .clickable {
-                        },
+                    modifier = Modifier.size(48.dp)
+                        .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Sync,
-                        contentDescription = "Shuffle",
-                        tint = Color.White
-                    )
+                    Icon(Icons.Default.Sync, "Shuffle", tint = Color.White)
                 }
+
                 Box(
-                    modifier = Modifier
-                        .size(48.dp)
+                    modifier = Modifier.size(48.dp)
                         .background(Color(0xFFB8A99A), RoundedCornerShape(12.dp))
-                        .clickable {
-                            // Aquí luego pondremos navegación
-                        },
+                        .clickable { pantallaActual_g1 = "principal" },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.GridView,
-                        contentDescription = "Grid",
-                        tint = Color.White
-                    )
+                    Icon(Icons.Default.GridView, "Grid", tint = Color.White)
                 }
             }
         }
-
     }
 }
-
-
 
 @Composable
 fun Celda_g1(valorInicial: Int, onCambio: (Int) -> Unit) {
