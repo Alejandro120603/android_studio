@@ -4,16 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.actividad1am.componentes.Botones
+import com.example.actividad1am.componentes.TextoCompletoView
+import com.example.actividad1am.componentes.TextoDecoradoView
+import com.example.actividad1am.componentes.TextoRepaso
+import com.example.actividad1am.componentes.TextoRepaso
 import com.example.actividad1am.ui.theme.Actividad1AMTheme
-import com.example.actividad1am.ui.theme.MyTextView
 
 
 class MainActivity : ComponentActivity() {
@@ -25,14 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Actividad1AMTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-
-                        Botones()
-                    )
-                }
+                TextoCompletoView()
             }
         }
     }
@@ -52,7 +44,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, myTextView: Unit) {
 @Composable
 fun GreetingPreview() {
     Actividad1AMTheme {
-        Greeting("Android", myTextView = MyTextView())
+        Greeting("Android", myTextView = TextoCompletoView())
     }
 
 }

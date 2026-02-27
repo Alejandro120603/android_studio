@@ -14,7 +14,4 @@
 .cxx
 local.properties
 
-# --- Ignore Android image resources---
-app/src/main/res/drawable/
-app/src/main/res/mipmap/
 
