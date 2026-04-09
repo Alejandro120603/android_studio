@@ -50,7 +50,4 @@ class ProductViewModel {
 
         return productList
     }
-
-
-
 }

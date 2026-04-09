@@ -27,7 +27,7 @@ fun TextoDecoradoView (){
     Text(text = "hola",
         color = Color.Red,
         modifier = Modifier.
-        padding(8.dp).
+        padding(10.dp).
         background(Color.Blue).
         padding(8.dp).
         background(Color.Yellow).

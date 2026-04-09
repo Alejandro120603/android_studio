@@ -230,3 +230,11 @@ fun PantallaCompleta() {
         )
     }
 }
+/*fun ChangeCourtColor() {
+        activo = !activo
+        if (activo) {
+            selectedColor = CourtColor1
+        } else {
+            selectedColor = CourtColor2
+        }
+    }*/
