@@ -18,11 +18,11 @@ import com.example.actividad1am.componentes.TextoRepaso
 import com.example.actividad1am.corrutinas.WinnerView
 import com.example.actividad1am.persistencia.ProfileView
 import com.example.actividad1am.ui.theme.Actividad1AMTheme
+import com.example.actividad1am.ActNavegacion.NavManager
+
 
 
 class MainActivity : ComponentActivity() {
-
-
 
     @SuppressLint("ViewModelConstructorInComposable")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Actividad1AMTheme {
-                val dogViewModel = DogViewModel()
-                DogView(dogViewModel)
+                DogView(DogViewModel())
             }
         }
     }

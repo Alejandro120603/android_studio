@@ -1,6 +1,5 @@
 package com.example.actividad1am.api
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -8,12 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import coil3.compose.AsyncImage
 
-/*@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun DogView(dogViewModel: DogViewModel) {
-
-    val dogViewModel = DogViewModel()
 
     Column(Modifier.fillMaxSize()) {
 
@@ -22,9 +19,16 @@ fun DogView(dogViewModel: DogViewModel) {
         Button(onClick = {
             dogViewModel.traerUrlImagen()
         }) {
-            Text(text = "Mostrar imagen")
+            Text(text = "Mostar imagen")
         }
 
         Text(text = dogViewModel.url)
+
+        if (dogViewModel.url.isNotBlank()) {
+            AsyncImage(
+                model = dogViewModel.url,
+                contentDescription = null,
+            )
+        }
     }
-}*/
+}

@@ -3,7 +3,6 @@ package com.example.actividad1am.ActList
 import com.example.actividad1am.R
 
 class ActListCategorias {
-
     fun getCategorias(): List<ActListDatos> {
 
         val aves = ActListDatos("Aves", R.drawable.aves, 1)
