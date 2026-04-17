@@ -2,10 +2,11 @@ package com.example.actividad1am.practicadenuevo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -22,63 +23,108 @@ fun practicadenuevoDetalle(select: Int, regresar: () -> Unit) {
 
     val cuentasView = practicadenuevoProvider()
     val perfil = cuentasView.getPerfil(select)
+    val amigos = cuentasView.getAmigos(select)
 
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(
-            onClick = regresar
-        ) {
-            Text("Regresar")
+        item {
+            Button(
+                onClick = regresar
+            ) {
+                Text("Regresar")
+            }
         }
 
         if (perfil != null) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(12.dp)
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = perfil.imagen),
-                        contentDescription = perfil.nombre,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(220.dp),
-                        contentScale = ContentScale.Crop
-                    )
+                    Column(
+                        modifier = Modifier.padding(12.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = perfil.imagen),
+                            contentDescription = perfil.nombre,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(220.dp),
+                            contentScale = ContentScale.Crop
+                        )
 
-                    Text(
-                        text = "Mi perfil",
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
+                        Text(
+                            text = "Mi perfil",
+                            modifier = Modifier.padding(top = 12.dp)
+                        )
 
-                    Text(
-                        text = "Nombre: ${perfil.nombre}",
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
+                        Text(
+                            text = "Nombre: ${perfil.nombre}",
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
 
-                    Text(
-                        text = "Edad: ${perfil.edad}",
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
+                        Text(
+                            text = "Edad: ${perfil.edad}",
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
 
-                    Text(
-                        text = "Usuario: ${perfil.usuario}",
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
+                        Text(
+                            text = "Usuario: ${perfil.usuario}",
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
+            }
+
+            item {
+                Text(
+                    text = "Amigos",
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
+
+            //Se cambia a LazyColumn para que el perfil y los amigos salgan en la misma lista
+            items(amigos) { amigo ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(12.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = amigo.imagen),
+                            contentDescription = amigo.nombre,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(180.dp),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Text(
+                            text = "Nombre: ${amigo.nombre}",
+                            modifier = Modifier.padding(top = 12.dp)
+                        )
+
+                        Text(
+                            text = "Edad: ${amigo.edad}",
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
                 }
             }
         } else {
-            //Si algo sale raro aquí muestra que no encontró el perfil
-            Text(
-                text = "No se encontro el perfil",
-                modifier = Modifier.padding(top = 16.dp)
-            )
+            item {
+                //Si algo sale raro aquí muestra que no encontró el perfil
+                Text(
+                    text = "No se encontro el perfil",
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
         }
     }
 }

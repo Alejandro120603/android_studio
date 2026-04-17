@@ -33,4 +33,47 @@ class practicadenuevoProvider {
             cuenta.select == select
         }
     }
+
+    fun getAmigos(select: Int): List<practicadenuevoAmigoDatos> {
+        //Se separan por cuenta para que cada perfil tenga sus cards abajo
+        return if (select == 1) {
+            listOf(
+                practicadenuevoAmigoDatos(
+                    "Antonio",
+                    24,
+                    R.drawable.sergio_canales
+                ),
+                practicadenuevoAmigoDatos(
+                    "Amir",
+                    23,
+                    R.drawable.amir
+                ),
+                practicadenuevoAmigoDatos(
+                    "Adrian",
+                    22,
+                    R.drawable.nino
+                )
+            )
+        } else if (select == 2) {
+            listOf(
+                practicadenuevoAmigoDatos(
+                    "Myrna",
+                    21,
+                    R.drawable.myrna
+                ),
+                practicadenuevoAmigoDatos(
+                    "Jaimito",
+                    20,
+                    R.drawable.gustambo
+                ),
+                practicadenuevoAmigoDatos(
+                    "Chuy",
+                    24,
+                    R.drawable.sergio_canales
+                )
+            )
+        } else {
+            emptyList()
+        }
+    }
 }

@@ -8,3 +8,9 @@ data class practicadenuevoDatos(
     val imagen: Int,
     val select: Int
 )
+
+data class practicadenuevoAmigoDatos(
+    val nombre: String,
+    val edad: Int,
+    val imagen: Int
+)
