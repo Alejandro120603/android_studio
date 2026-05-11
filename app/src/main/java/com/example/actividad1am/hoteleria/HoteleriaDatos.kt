@@ -13,3 +13,4 @@ data class HoteleriaReservaDatos(
     val nombre: String,
     val telefono: String
 )
+
